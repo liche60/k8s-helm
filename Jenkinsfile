@@ -8,7 +8,7 @@ podTemplate(label: 'mypod', containers: [
   ]) {
     node('mypod') {
 
-	    stage('Checkout') {
+	stage('Checkout') {
         	checkout scm
       	}
 
