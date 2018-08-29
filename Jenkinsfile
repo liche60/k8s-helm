@@ -1,4 +1,4 @@
-podTemplate(label: 'helm-builder-deployer', containers: [
+podTemplate(label: 'mypod', containers: [
     containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.0', command: 'cat', ttyEnabled: true),
     containerTemplate(name: 'helm', image: 'liche60/k8s-helm:latest', command: 'cat', ttyEnabled: true)
@@ -6,7 +6,7 @@ podTemplate(label: 'helm-builder-deployer', containers: [
   volumes: [
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
   ]) {
-    node('helm-builder-deployer') {
+    node('mypod') {
 
         stage('do some Docker work') {
             container('docker') {
