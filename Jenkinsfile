@@ -23,11 +23,11 @@ podTemplate(label: 'mypod', containers: [
                     
 
                     sh """
-                        docker build .
-                        docker tag ubuntu ${env.DOCKER_HUB_USER}/ubuntu:${env.BUILD_NUMBER}
+                        docker build . -t ${env.DOCKER_HUB_USER}/k8s-helm:latest
                         """
                     sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD} "
-                    sh "docker push ${env.DOCKER_HUB_USER}/ubuntu:${env.BUILD_NUMBER} "
+                    sh "docker push ${env.DOCKER_HUB_USER}/k8s-helm:latest "
+
                 }
             }
         }
