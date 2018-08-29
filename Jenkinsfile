@@ -8,17 +8,22 @@ podTemplate(label: 'mypod', containers: [
   ]) {
     node('mypod') {
 
-        stage('do some Docker work') {
+	    stage('Checkout') {
+        	checkout scm
+      	}
+
+        stage('Build') {
             container('docker') {
 
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', 
                         credentialsId: 'dockerhub',
                         usernameVariable: 'DOCKER_HUB_USER', 
                         passwordVariable: 'DOCKER_HUB_PASSWORD']]) {
+
                     
+
                     sh """
-                        echo ${env.DOCKER_HUB_USER}
-                        docker pull ubuntu
+                        docker build .
                         docker tag ubuntu ${env.DOCKER_HUB_USER}/ubuntu:${env.BUILD_NUMBER}
                         """
                     sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD} "
@@ -26,7 +31,7 @@ podTemplate(label: 'mypod', containers: [
                 }
             }
         }
-
+	/*
         stage('do some kubectl work') {
             container('kubectl') {
 
@@ -45,5 +50,6 @@ podTemplate(label: 'mypod', containers: [
                sh "helm ls"
             }
         }
+	*/
     }
 }
