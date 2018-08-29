@@ -1,4 +1,4 @@
-podTemplate(label: 'mypod', containers: [
+podTemplate(label: 'helm-builder-deployer', containers: [
     containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat'),
     containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.8.0', command: 'cat', ttyEnabled: true),
     containerTemplate(name: 'helm', image: 'liche60/k8s-helm:latest', command: 'cat', ttyEnabled: true)
